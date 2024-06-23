@@ -1,0 +1,19 @@
+.search-form {
+    position: relative;
+    width: 100%;
+  }
+  
+  .search-input {
+    padding-right: 40px; /* Ajusta según el tamaño del icono */
+  }
+  
+  .search-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px; /* Ajusta según necesites */
+    height: 16px; /* Ajusta según necesites */
+    pointer-events: none; /* Para que el icono no interfiera con el clic en el campo de texto */
+  }
+  

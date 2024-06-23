@@ -1,0 +1,39 @@
+
+.product-card {
+    width: 30vw; /* Ajusta el ancho de la tarjeta según tus necesidades */
+    margin-bottom: 50px;
+    border: 1px solid #ffffff; /* Ejemplo de borde opcional */
+    border-radius: 8px; /* Ejemplo de borde redondeado opcional */
+    overflow: hidden; /* Oculta cualquier contenido que exceda el tamaño de la tarjeta */
+  }
+  
+  .card-image {
+    width: 100%; /* Ajusta el tamaño de la imagen para llenar completamente la tarjeta */
+    height: auto; 
+    object-fit: cover; 
+  }
+  
+  .card-body {
+    padding: 1rem; /* Ajusta el relleno interno del cuerpo de la tarjeta */
+  }
+  
+  .card-title {
+    font-size: 1.2rem; /* Ejemplo de tamaño de fuente para el título */
+    margin-bottom: 1rem; /* Espaciado opcional entre el título y el contenido */
+  }
+  
+  .text-start {
+    text-align: left; 
+  }
+  
+  .text-end {
+    text-align: right; 
+    background-color: #db141b;
+  }
+  
+  .custom-carousel {
+    position: relative;
+    overflow-x: hidden; 
+  }
+  
+  
