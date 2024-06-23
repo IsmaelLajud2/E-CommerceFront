@@ -1,5 +1,5 @@
-import React ,{useState} from 'react';
-import { Card, Button, Carousel } from 'react-bootstrap';
+import React  from 'react';
+import { Card, Carousel } from 'react-bootstrap';
 
 const CardProducts = ({ prod }) => {
   const { name, precio, category, imagen } = prod;
@@ -14,7 +14,7 @@ const CardProducts = ({ prod }) => {
               <Card.Title>{name}</Card.Title>
               <div className="d-flex justify-content-between align-items-center">
                 <p className="text-start">{category}</p>
-                <p className="text-end ">{precio} €</p>
+                <p className="text-end" style={{color:"red"}}>{precio} <span> € </span></p>
               </div>
             
             </Card.Body>

@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React,{useState,useEffect } from 'react'
 import CardProducts from './CardProducts'
-import { Row, Col, Carousel, CarouselItem } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 
 
 

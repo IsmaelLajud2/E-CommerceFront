@@ -2,9 +2,7 @@
 .product-card {
     width: 30vw; /* Ajusta el ancho de la tarjeta según tus necesidades */
     margin-bottom: 50px;
-    border: 1px solid #ffffff; /* Ejemplo de borde opcional */
-    border-radius: 8px; /* Ejemplo de borde redondeado opcional */
-    overflow: hidden; /* Oculta cualquier contenido que exceda el tamaño de la tarjeta */
+     overflow: hidden; /* Oculta cualquier contenido que exceda el tamaño de la tarjeta */
   }
   
   .card-image {
@@ -26,10 +24,12 @@
     text-align: left; 
   }
   
-  .text-end {
+  .text-end{
     text-align: right; 
     background-color: #db141b;
+ 
   }
+  
   
   .custom-carousel {
     position: relative;
