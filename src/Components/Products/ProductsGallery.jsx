@@ -32,7 +32,9 @@ const ProductsGallery = () => {
     return (
    <>
    <div className='container-products'>
-    <h1>Nuevos Productos</h1>
+        <div>
+            <h3 className='text-header'>{products.length} PRODUCTOS</h3>
+        </div>
 
         <Row>
             {products.map((product) =>(

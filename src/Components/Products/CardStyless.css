@@ -1,8 +1,9 @@
 
 .product-card {
-    width: 30vw; /* Ajusta el ancho de la tarjeta según tus necesidades */
+    width: 30vw; 
     margin-bottom: 50px;
-     overflow: hidden; /* Oculta cualquier contenido que exceda el tamaño de la tarjeta */
+     overflow: hidden;
+     margin-left: 10%; 
   }
   
   .card-image {
@@ -12,7 +13,7 @@
   }
   
   .card-body {
-    padding: 1rem; /* Ajusta el relleno interno del cuerpo de la tarjeta */
+    padding: 1rem; 
   }
   
   .card-title {

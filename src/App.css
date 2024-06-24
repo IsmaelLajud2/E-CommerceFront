@@ -1,6 +1,40 @@
+@font-face {
+  font-family: 'FFDINforPuma';
+  src: url('/path/to/FFDINforPuma.woff2') format('woff2'),
+       url('/path/to/FFDINforPuma.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 body{
   margin: 0;
   padding: 0;
   overflow-x:hidden ;
   
+}
+
+.header-app{
+  display: block;
+  padding : 0 0 3px 0;
+  align-items: center;
+  justify-content: center;
+  background-color: #ae946d;
+  color: #fff;
+  font-family: 'Open Sans', sans-serif;
+ 
+  font-size:  .875rem;
+  text-align: center;
+
+}
+.b-text{
+margin-right: .4%;
+
+} 
+.text-header-promos {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 1%;
+  padding-top: .9rem;
+  text-align: center;
+
 }
