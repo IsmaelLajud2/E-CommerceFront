@@ -40,10 +40,10 @@ const Navbar1 = () => {
             <Nav.Link href="#action2" className='mx-4' style={navWhiteStyle} >Zapatillas</Nav.Link>
       
     
-            <Nav.Link href="#" className='mx-3' disabled style={navWhiteStyle}>
+            <Nav.Link href="#" className='mx-3' style={navWhiteStyle}>
               Camisetas
             </Nav.Link>
-            <Nav.Link href="#" className='mx-3' disabled style={navWhiteStyle}>
+            <Nav.Link href="#" className='mx-3' style={navWhiteStyle}>
               Sudaderas
             </Nav.Link>
           </Nav>
