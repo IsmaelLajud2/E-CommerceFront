@@ -1,10 +1,9 @@
 import axios from 'axios'
-import React, { useState, useEffect } from 'react'
-import CardProducts from './CardProducts'
-import { Row, Col } from 'react-bootstrap';
-import Loading from './Loading';
+import { useState, useEffect } from 'react'
 
-
+import { Row, Col } from 'react-bootstrap'
+import CardProducts from '../Components/CardProducts'
+import Loading from '../Components/Loading'
 
 const ProductsGallery = () => {
     const [products, setProducts] = useState([])
@@ -12,13 +11,12 @@ const ProductsGallery = () => {
 
     const getAllProducts = async () => {
         try {
-            const response = await axios.get("http://localhost:8091/api/productos/getAvailableProducts")
+            const response = await axios.get('http://localhost:8091/api/productos/getAvailableProducts')
             setProducts(response.data)
             console.log(response.data)
             setLoading(false)
         } catch (error) {
-            return       setLoading(true)
-          
+            return setLoading(true)
         }
     }
 
@@ -26,23 +24,19 @@ const ProductsGallery = () => {
         getAllProducts()
     }, [])
 
-
-
-
-
-
-
     return (
         <>
 
             <div className='container-products'>
-                {loading ? (
-                    <div style={{ display: 'flex', justifyContent: 'center', textAlign: 'center' ,marginTop:'150px' }} >
-                        <Loading />
-                    </div>
+                {loading
+                    ? (
+                        <div style={{ display: 'flex', justifyContent: 'center', textAlign: 'center', marginTop: '150px' }} >
+                            <Loading />
+                        </div>
 
-                ) : (
-        <><div>
+                    )
+                    : (
+                        <><div>
                             <h3 className='text-header'>{products.length} PRODUCTOS</h3>
                         </div><Row>
                                 {products.map((product) => (
@@ -51,10 +45,7 @@ const ProductsGallery = () => {
                                     </Col>
                                 ))}
                             </Row></>
-                )
-
-
-
+                    )
 
                 }
             </div>

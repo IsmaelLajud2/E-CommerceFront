@@ -1,45 +1,46 @@
 import React from 'react'
-import { Container, Form, Nav, Navbar, NavDropdown} from 'react-bootstrap'
+import { Container, Form, Nav, Navbar, NavbarText, NavDropdown } from 'react-bootstrap'
 import '../Styles/NavBarStyles.css'
+import { Link } from 'react-router-dom'
 const Navbar1 = () => {
 
-  const navbarStyle1 ={
-    backgroundColor: 'black', 
-     
+  const navbarStyle1 = {
+    backgroundColor: 'black',
+
   };
-  const navWhiteStyle={
-    color :'#fff',
-    
+  const navWhiteStyle = {
+    color: '#fff',
+
   }
 
-  const inputStyles ={
-    backgroundColor: 'black' ,
-      color: '#fff', 
-      paddingRight: '40px', 
-      fontSize: '16px',
-      width: 'calc(100% - 40px)', 
-      height: '38px',
-    
+  const inputStyles = {
+    backgroundColor: 'black',
+    color: '#fff',
+    paddingRight: '40px',
+    fontSize: '16px',
+    width: 'calc(100% - 40px)',
+    height: '38px',
+
   }
-  
-  
+
+
   return (
-    <Navbar expand="lg"  className="" style={navbarStyle1} sticky="top" >
+    <Navbar expand="lg" className="" style={navbarStyle1} sticky="top" >
       <Container fluid>
         <Navbar.Brand href="#" style={navWhiteStyle} >
           <img src='public\GonzaloLOGO.jpeg' className='imagen-brand'></img>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
-          <Nav 
+          <Nav
             className="mx-auto my-2 my-lg-0"
             style={{ maxHeight: '100px' }}
             navbarScroll
           >
-          
-            <Nav.Link href="#action2" className='mx-4' style={navWhiteStyle} >Zapatillas</Nav.Link>
-      
-    
+            <NavbarText>
+              <Link to={"/zapatillas"} className='mx-4' style={navWhiteStyle} >Zapatillas</Link>
+            </NavbarText>
+
             <Nav.Link href="#" className='mx-3' style={navWhiteStyle}>
               Camisetas
             </Nav.Link>
@@ -47,7 +48,7 @@ const Navbar1 = () => {
               Sudaderas
             </Nav.Link>
           </Nav>
-          
+
           <Form className="d-flex align-items-center" style={navWhiteStyle}>
 
             <Form.Control
@@ -56,12 +57,12 @@ const Navbar1 = () => {
               className="search-input"
               aria-label="Search"
               style={inputStyles}
-            
-            />
-       <img src="searchIcon.svg" alt="Search Icon" className="search-icon"  />
-          
 
-        
+            />
+            <img src="searchIcon.svg" alt="Search Icon" className="search-icon" />
+
+
+
           </Form>
         </Navbar.Collapse>
       </Container>
