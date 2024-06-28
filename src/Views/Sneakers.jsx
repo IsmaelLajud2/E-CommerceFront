@@ -32,7 +32,7 @@ const Sneakers = () => {
 
     return (
         <>
-            <h1>Zapatillas</h1>
+            <h1>SNEAKERS PARA HOMBRE</h1>
             <div className='container-products'>
                 {loading
                     ? (
@@ -42,9 +42,10 @@ const Sneakers = () => {
 
                     )
                     : (
-                        <><div>
-                            <h3 className='text-header'>{Snickers.length} PRODUCTOS2</h3>
-                        </div><Row>
+                        <>
+                            <div>
+                                <b className='text-header'>{Snickers.length} PRODUCTOS</b>
+                            </div><Row>
                                 {Snickers.map((snicker) => (
                                     <Col key={snicker._id} className='col-md-3'>
                                         <CardSneakers prod={snicker} />

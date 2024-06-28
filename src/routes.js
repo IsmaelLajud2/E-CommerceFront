@@ -1,11 +1,13 @@
 
+import CamisetasGallery from "./Views/CamisetasGallery"
 import ProductsGallery from "./Views/ProductsGallery"
 import Sneakers from "./Views/Sneakers"
+import Sudaderas from "./Views/Sudaderas"
 
 
 const routes = [
     {
-        path: '/home',
+        path: '/',
         Element: ProductsGallery
 
     },
@@ -14,8 +16,13 @@ const routes = [
         Element: Sneakers
     },
     {
+        path: '/camisetas',
+        Element: CamisetasGallery
+
+    },
+    {
         path: '/sudaderas',
-        Element: ""
+        Element: Sudaderas
     }
 
 ]
