@@ -1,0 +1,49 @@
+@font-face {
+  font-family: 'Roboto', sans-serif;
+
+  src: url("link href='https://fonts.googleapis.com/css?family=Roboto:500,900,100,300,700,400' rel='stylesheet' type='text/css");
+}
+
+.search-icon {
+  display: block;
+  position: absolute;
+  margin-right: 12%;
+  right: 42px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+
+}
+
+.text-header {
+  font-family: Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 400 bold;
+  line-height: 1.5;
+  color: #222;
+  margin-left: 2%;
+  margin: 40px;
+  justify-content: left;
+
+}
+
+.imagen-brand {
+  display: flex;
+  height: 50px;
+  width: 50px;
+  border-radius: 40%;
+  margin-left: 40px;
+  object-fit: cover;
+}
+
+.navbar-link {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 0 10px;
+
+
+}

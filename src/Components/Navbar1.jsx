@@ -27,7 +27,7 @@ const Navbar1 = () => {
   return (
     <Navbar expand="lg" className="" style={navbarStyle1} sticky="top" >
       <Container fluid>
-        <Navbar.Brand href="#" style={navWhiteStyle} >
+        <Navbar.Brand href="/" style={navWhiteStyle} >
           <img src='public\GonzaloLOGO.jpeg' className='imagen-brand'></img>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
@@ -37,16 +37,16 @@ const Navbar1 = () => {
             style={{ maxHeight: '100px' }}
             navbarScroll
           >
-            <NavbarText>
-              <Link to={"/zapatillas"} className='mx-4' style={navWhiteStyle} >Zapatillas</Link>
+            <NavbarText className='navheadear'>
+              <Link to={"/zapatillas"} className='navbar-link mx-4' style={navWhiteStyle} >Zapatillas</Link>
             </NavbarText>
 
-            <Nav.Link href="#" className='mx-3' style={navWhiteStyle}>
-              Camisetas
-            </Nav.Link>
-            <Nav.Link href="#" className='mx-3' style={navWhiteStyle}>
-              Sudaderas
-            </Nav.Link>
+            <NavbarText>
+              <Link to={"/sudaderas"} className=' navbar-link mx-4' style={navWhiteStyle} >Sudaderas</Link>
+            </NavbarText>
+            <NavbarText>
+              <Link to={"/camisetas"} className='navbar-link mx-4' style={navWhiteStyle} >Camisetas</Link>
+            </NavbarText>
           </Nav>
 
           <Form className="d-flex align-items-center" style={navWhiteStyle}>
