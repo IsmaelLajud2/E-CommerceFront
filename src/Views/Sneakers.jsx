@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-
 import axios from 'axios'
 
 import { Row, Col } from 'react-bootstrap'
@@ -32,7 +31,7 @@ const Sneakers = () => {
 
     return (
         <>
-            <h1>SNEAKERS PARA HOMBRE</h1>
+            <h1 >SNEAKERS PARA HOMBRE</h1>
             <div className='container-products'>
                 {loading
                     ? (
@@ -43,7 +42,7 @@ const Sneakers = () => {
                     )
                     : (
                         <>
-                            <div>
+                            <div className='div-textheader'>
                                 <b className='text-header'>{Snickers.length} PRODUCTOS</b>
                             </div><Row>
                                 {Snickers.map((snicker) => (

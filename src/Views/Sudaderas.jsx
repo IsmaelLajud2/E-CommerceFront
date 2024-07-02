@@ -38,7 +38,7 @@ const Sudaderas = () => {
 
                     )
                     : (
-                        <><div>
+                        <><div className='div-textheader'>
                             <b className='text-header'>{sudaderas.length} PRODUCTOS</b>
                         </div>
                             <Row>

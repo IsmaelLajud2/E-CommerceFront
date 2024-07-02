@@ -39,7 +39,7 @@ const CamisetasGallery = () => {
                     :
                     (
                         <>
-                            <div>
+                            <div className='div-textheader'>
                                 <b>{camisetas.length} Productos</b> </div>
                             <Row>
                                 {
