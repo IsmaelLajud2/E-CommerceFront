@@ -40,7 +40,8 @@ const CamisetasGallery = () => {
                     (
                         <>
                             <div className='div-textheader'>
-                                <b>{camisetas.length} Productos</b> </div>
+                                <b className='text-header'>{camisetas.length} PRODUCTOS</b>
+                            </div>
                             <Row>
                                 {
                                     camisetas.map((camiseta) => (

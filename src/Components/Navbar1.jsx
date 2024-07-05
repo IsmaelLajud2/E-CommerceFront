@@ -28,7 +28,7 @@ const Navbar1 = () => {
     <Navbar expand="lg" className="" style={navbarStyle1} sticky="top" >
       <Container fluid>
         <Navbar.Brand href="/" style={navWhiteStyle} >
-          <img src='public\GonzaloLOGO.jpeg' className='imagen-brand'></img>
+          <img src='/GonzaloLOGO.jpeg' className='imagen-brand'></img>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
