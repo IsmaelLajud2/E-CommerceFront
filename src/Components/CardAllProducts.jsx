@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Carousel } from 'react-bootstrap';
 
-const CardProducts = ({ prod }) => {
+const CardAllProducts = ({ prod }) => {
   const { name, precio, category, imagen } = prod;
 
   return (
@@ -31,4 +31,4 @@ const CardProducts = ({ prod }) => {
   );
 };
 
-export default CardProducts;
+export default CardAllProducts;

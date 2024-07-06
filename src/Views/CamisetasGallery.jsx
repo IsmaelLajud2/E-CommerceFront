@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Row, Col } from 'react-bootstrap'
 import Loading from '../Components/Loading'
-import CamisetasCard from '../Components/CamisetasCard'
+import CardAllProducts from '../Components/CardAllProducts'
 
 const CamisetasGallery = () => {
 
@@ -46,7 +46,7 @@ const CamisetasGallery = () => {
                                 {
                                     camisetas.map((camiseta) => (
                                         <Col className='col-md-3'>
-                                            <CamisetasCard key={camiseta._id} prod={camiseta} ></CamisetasCard>
+                                            <CardAllProducts key={camiseta._id} prod={camiseta} />
                                         </Col>
                                     ))
                                 }

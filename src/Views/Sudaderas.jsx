@@ -1,28 +1,17 @@
-import { useState, useEffect } from 'react'
-import axios from 'axios'
+import React from 'react'
 import Loading from '../Components/Loading'
-import CardSudaderas from '../Components/CardSudaderas'
+
 import { Col, Row } from 'react-bootstrap'
+import CardAllProducts from '../Components/CardAllProducts'
+import useFilteredProducts from '../Hooks/SortedProducts'
 
 const Sudaderas = () => {
-    const [sudaderas, setSudaderas] = useState([])
-    const [loading, setLoading] = useState(false)
+    const { products, loading, setOrder, order } = useFilteredProducts("sudaderas")
 
-
-    const getProducts = async () => {
-        try {
-            const response = await axios.get('http://localhost:8091/api/productos/sortedProducts/?category=sudaderas');
-            setSudaderas(response.data)
-            console.log(response)
-            setLoading(false)
-        } catch (error) {
-            return setLoading(true)
-        }
+    const handleChange = (e) => {
+        setOrder(e.target.value)
     }
 
-    useEffect(() => {
-        getProducts()
-    }, [])
 
     return (
 
@@ -39,14 +28,21 @@ const Sudaderas = () => {
                     )
                     : (
                         <><div className='div-textheader'>
-                            <b className='text-header'>{sudaderas.length} PRODUCTOS</b>
+                            <b className='text-header'>{products.length} PRODUCTOS</b>
+                            <select value={order} onChange={handleChange} >
+                                <option value="" disabled>Seleccionar</option>
+                                <option value="price_asc">Precio más barato primero ⬆</option>
+                                <option value="price_desc">Precio más caro primero ⬇ </option>
+
+                            </select>
+
                         </div>
                             <Row>
-                                {sudaderas.map((sudadera) => (
+                                {products.map((product) => (
 
 
-                                    <Col key={sudadera._id} className='col-md-3'>
-                                        <CardSudaderas prod={sudadera} />
+                                    <Col key={product._id} className='col-md-3'>
+                                        <CardAllProducts prod={product} />
                                     </Col>
                                 ))}
                             </Row></>

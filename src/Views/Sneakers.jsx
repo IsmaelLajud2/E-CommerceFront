@@ -4,7 +4,8 @@ import axios from 'axios'
 import { Row, Col } from 'react-bootstrap'
 
 import Loading from '../Components/Loading'
-import CardSneakers from '../Components/CardSneakers'
+import CardAllProducts from '../Components/CardAllProducts'
+
 
 const Sneakers = () => {
 
@@ -47,7 +48,7 @@ const Sneakers = () => {
                             </div><Row>
                                 {Snickers.map((snicker) => (
                                     <Col key={snicker._id} className='col-md-3'>
-                                        <CardSneakers prod={snicker} />
+                                        <CardAllProducts prod={snicker} />
                                     </Col>
                                 ))}
                             </Row></>
