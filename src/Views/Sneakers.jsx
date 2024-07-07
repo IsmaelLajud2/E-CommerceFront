@@ -5,29 +5,16 @@ import { Row, Col } from 'react-bootstrap'
 
 import Loading from '../Components/Loading'
 import CardAllProducts from '../Components/CardAllProducts'
+import useFilteredProducts from '../Hooks/SortedProducts'
 
 
 const Sneakers = () => {
 
-    const [Snickers, setGetSnickers] = useState([])
-    const [loading, setLoading] = useState(false)
+    const { products, loading, setOrder, order } = useFilteredProducts("food")
 
-    const getInfo = async () => {
-        try {
-            const response = await axios.get('http://localhost:8091/api/productos/sortedProducts/?category=food')
-            setGetSnickers(response.data)
-            console.log(setGetSnickers)
-            setLoading(false)
-        } catch (error) {
-
-            return setLoading(true)
-        }
+    const handleChange = (e) => {
+        setOrder(e.target.value)
     }
-
-    useEffect(() => {
-        getInfo()
-    }, [])
-
 
 
     return (
@@ -44,11 +31,16 @@ const Sneakers = () => {
                     : (
                         <>
                             <div className='div-textheader'>
-                                <b className='text-header'>{Snickers.length} PRODUCTOS</b>
+                                <b className='text-header'>{products.length} PRODUCTOS</b>
+                                <select onChange={handleChange} value={order}>
+                                    <option value="" disabled>Seleccionar</option>
+                                    <option value="price_asc">Precio más barato primero ⬆</option>
+                                    <option value="price_desc">Precio más caro primero ⬇ </option>
+                                </select>
                             </div><Row>
-                                {Snickers.map((snicker) => (
-                                    <Col key={snicker._id} className='col-md-3'>
-                                        <CardAllProducts prod={snicker} />
+                                {products.map((product) => (
+                                    <Col key={product._id} className='col-md-3'>
+                                        <CardAllProducts prod={product} />
                                     </Col>
                                 ))}
                             </Row></>

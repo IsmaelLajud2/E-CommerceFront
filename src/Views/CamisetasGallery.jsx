@@ -1,30 +1,19 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import { Row, Col } from 'react-bootstrap'
+import { Row, Col, Form } from 'react-bootstrap'
 import Loading from '../Components/Loading'
 import CardAllProducts from '../Components/CardAllProducts'
+import useFilteredProducts from '../Hooks/SortedProducts'
+
 
 const CamisetasGallery = () => {
 
-    const [camisetas, setCamisetas] = useState([])
+    const { products, loading, setOrder, order } = useFilteredProducts("camisetas")
 
-    const [loading, setLoading] = useState(false)
 
-    const getProducts = async () => {
-        try {
-            const response = await axios.get('http://localhost:8091/api/productos/sortedProducts/?category=camisetas')
-            setCamisetas(response.data)
-            setLoading(false)
-
-        } catch (error) {
-            return setLoading(true)
-        }
+    const handleChange = (e) => {
+        setOrder(e.target.value)
     }
-
-    useEffect(() => {
-        getProducts()
-    }, [])
-
 
     return (
         <>
@@ -40,13 +29,22 @@ const CamisetasGallery = () => {
                     (
                         <>
                             <div className='div-textheader'>
-                                <b className='text-header'>{camisetas.length} PRODUCTOS</b>
+                                <b className='text-header'>{products.length} PRODUCTOS</b>
+
+                                <Form.Select onChange={handleChange} className='ms-3' value={order} style={{
+                                    width: 'auto',
+                                    maxWidth: '270px', backgroundColor: '#333333', color: "white"
+                                }}>
+                                    <option disabled>Seleccionar</option>
+                                    <option value="price_asc">Precio más barato primero ⬆</option>
+                                    <option value="price_desc">Precio más caro primero ⬇ </option>
+                                </Form.Select>
                             </div>
                             <Row>
                                 {
-                                    camisetas.map((camiseta) => (
-                                        <Col className='col-md-3'>
-                                            <CardAllProducts key={camiseta._id} prod={camiseta} />
+                                    products.map((product) => (
+                                        <Col className='col-md-3' key={product._id}>
+                                            <CardAllProducts prod={product} />
                                         </Col>
                                     ))
                                 }

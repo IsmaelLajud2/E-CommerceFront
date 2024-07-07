@@ -14,5 +14,7 @@ h1 {
   border-top: 1px solid #eee;
   padding: 2%;
   border-bottom: 1px solid #eee;
-  margin-bottom: 5%
+  margin-bottom: 5%;
+  display: flex;
+  align-items: center;
 }
