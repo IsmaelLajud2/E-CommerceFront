@@ -1,7 +1,7 @@
 import React from 'react'
 import Loading from '../Components/Loading'
 
-import { Col, Row } from 'react-bootstrap'
+import { Col, Row, Form } from 'react-bootstrap'
 import CardAllProducts from '../Components/CardAllProducts'
 import useFilteredProducts from '../Hooks/SortedProducts'
 
@@ -29,12 +29,14 @@ const Sudaderas = () => {
                     : (
                         <><div className='div-textheader'>
                             <b className='text-header'>{products.length} PRODUCTOS</b>
-                            <select value={order} onChange={handleChange} >
-                                <option value="" disabled>Seleccionar</option>
+                            <Form.Select onChange={handleChange} className='ms-3' value={order} style={{
+                                width: 'auto',
+                                maxWidth: '270px', backgroundColor: '#333333', color: "white"
+                            }}>
+                                <option disabled>Seleccionar</option>
                                 <option value="price_asc">Precio más barato primero ⬆</option>
                                 <option value="price_desc">Precio más caro primero ⬇ </option>
-
-                            </select>
+                            </Form.Select>
 
                         </div>
                             <Row>

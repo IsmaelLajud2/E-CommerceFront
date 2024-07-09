@@ -1,5 +1,3 @@
-import { useState, useEffect } from 'react'
-import axios from 'axios'
 import { Row, Col, Form } from 'react-bootstrap'
 import Loading from '../Components/Loading'
 import CardAllProducts from '../Components/CardAllProducts'
@@ -29,7 +27,7 @@ const CamisetasGallery = () => {
                     (
                         <>
                             <div className='div-textheader'>
-                                <b className='text-header'>{products.length} PRODUCTOS</b>
+                                <b className='text-header'>{products.length > 0 ? `${products.length} ${products.length === 1 ? "PRODUCTO" : "PRODUCTOS"}` : "PRODUCTO NO DISPONIBLE"}</b>
 
                                 <Form.Select onChange={handleChange} className='ms-3' value={order} style={{
                                     width: 'auto',

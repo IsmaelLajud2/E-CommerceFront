@@ -1,4 +1,5 @@
 
+import AdminPage from "./Admin/AdminPage"
 import CamisetasGallery from "./Views/CamisetasGallery"
 import ProductsGallery from "./Views/ProductsGallery"
 import Sneakers from "./Views/Sneakers"
@@ -23,6 +24,10 @@ const routes = [
     {
         path: '/sudaderas',
         Element: Sudaderas
+    },
+    {
+        path: '/admin',
+        Element: AdminPage
     }
 
 ]
