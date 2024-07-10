@@ -89,10 +89,10 @@ const AdminPage = () => {
                         <Row>
                             <h1>Administrador de productos</h1>
                             {
-                                <Table>
+                                <Table striped bordered variant='grey'>
                                     <thead>
                                         <tr>
-                                            <th>id</th>
+                                            <th>id del producto</th>
                                             <th>Nombre</th>
                                             <th>Categoría</th>
                                             <th>Precio</th>
@@ -119,7 +119,7 @@ const AdminPage = () => {
                                                     </td>
                                                     <td>
                                                         <Button variant='danger' size='sm' className='mx-2' onClick={() => (handleDeleteConfirmation(product._id))}>BORRAR</Button>
-                                                        <ModalEditProduct setChangeFlag={setFlag} product={getAllProducts} >EDITAR</ModalEditProduct>
+                                                        <ModalEditProduct product={getAllProducts} >EDITAR</ModalEditProduct>
                                                     </td>
                                                 </tr>
                                             )

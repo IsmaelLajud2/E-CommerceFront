@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { Modal, Button, Form } from 'react-bootstrap'
-const ModalEditProduct = ({ setChangeFlag, product }) => {
+const ModalEditProduct = ({ product }) => {
     const [showModal, setShowModal] = useState(false)
+    const [flag, setFlag] = useState(false)
     const [selectedProduct, setSelectedProduct] = useState({
         _id: product._id || '',
         name: product.name || '',
@@ -20,15 +21,15 @@ const ModalEditProduct = ({ setChangeFlag, product }) => {
         setShowModal(true)
     }
 
-    const editProduct = async (_id) => {
+    const editProduct = async ({ target }, _id) => {
         try {
-            const response = await axios.patch(`http://localhost:8091/api/productos/edit/${_id}`, selectedProduct, {
+            const response = await axios.patch(`http://localhost:8091/api/productos/edit/${_id}`, { selectedProduct: target.value }, {
                 headers: {
                     "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NzcxODcxYjFiYTQwMzkxYTZmMWJlMiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyMDUzNjA0MX0.6nu6Ake0YRs--GAEbnwKHzSqLfykkPwgh6x-DOsGQlI"
                 }
 
             })
-            setChangeFlag((prev => !prev))
+            setFlag(!flag)
             console.log(response)
         } catch (error) {
             console.log(error)
@@ -108,7 +109,7 @@ const ModalEditProduct = ({ setChangeFlag, product }) => {
                     <Button variant="danger" onClick={handleClose}>
                         Cancelar
                     </Button>
-                    <Button variant="primary" onClick={() => editProduct(selectedProduct._id)}>
+                    <Button variant="primary" onClick={(e) => editProduct(e, selectedProduct._id)}>
                         Guardar Cambios
                     </Button>
                 </Modal.Footer>
