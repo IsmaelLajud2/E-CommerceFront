@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
+
 const useFilteredProducts = (initialCategory, initialOrder = "price_asc") => {
 
     const [products, setProducts] = useState([])

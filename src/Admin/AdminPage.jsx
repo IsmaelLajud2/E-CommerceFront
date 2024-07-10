@@ -119,7 +119,7 @@ const AdminPage = () => {
                                                     </td>
                                                     <td>
                                                         <Button variant='danger' size='sm' className='mx-2' onClick={() => (handleDeleteConfirmation(product._id))}>BORRAR</Button>
-                                                        <ModalEditProduct product={getAllProducts} >EDITAR</ModalEditProduct>
+                                                        <ModalEditProduct products={product} setFlag={setFlag} >EDITAR</ModalEditProduct>
                                                     </td>
                                                 </tr>
                                             )

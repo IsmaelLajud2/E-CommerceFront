@@ -1,35 +1,41 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { Modal, Button, Form } from 'react-bootstrap'
-const ModalEditProduct = ({ product }) => {
+
+
+const ModalEditproducts = ({ products, setFlag }) => {
     const [showModal, setShowModal] = useState(false)
-    const [flag, setFlag] = useState(false)
-    const [selectedProduct, setSelectedProduct] = useState({
-        _id: product._id || '',
-        name: product.name || '',
-        precio: product.precio || '',
-        category: product.category || '',
-        imagen: product.imagen || ''
+
+    const [selectedproducts, setSelectedproducts] = useState({
+        _id: products._id || '',
+        name: products.name || '',
+        precio: products.precio || '',
+        category: products.category || '',
+        imagen: products.imagen || ''
     })
 
     const handleClose = () => {
         setShowModal(false)
     }
 
+
+
+
     const handleShow = () => {
-        setSelectedProduct(product)
+        setSelectedproducts(products)
         setShowModal(true)
     }
 
-    const editProduct = async ({ target }, _id) => {
+    const editproducts = async (e, _id) => {
+        e.preventDefault()
         try {
-            const response = await axios.patch(`http://localhost:8091/api/productos/edit/${_id}`, { selectedProduct: target.value }, {
+            const response = await axios.patch(`http://localhost:8091/api/productos/edit/${_id}`, selectedproducts, {
                 headers: {
-                    "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NzcxODcxYjFiYTQwMzkxYTZmMWJlMiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyMDUzNjA0MX0.6nu6Ake0YRs--GAEbnwKHzSqLfykkPwgh6x-DOsGQlI"
+                    "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NzcxODcxYjFiYTQwMzkxYTZmMWJlMiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyMDUzNjA0MX0.6nu6Ake0YRs--GAEbnwKHzSqLfykkPwgh6x-DOsGQlI",
                 }
 
             })
-            setFlag(!flag)
+            setFlag((prevFlag) => !prevFlag)
             console.log(response)
         } catch (error) {
             console.log(error)
@@ -47,19 +53,19 @@ const ModalEditProduct = ({ product }) => {
 
             <Modal show={showModal} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Editar informacion de los productos</Modal.Title>
+                    <Modal.Title>Editar informacion de los productsos</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form>
+                    <Form onSubmit={editproducts}>
                         <Form.Group className="mb-3" controlId="name">
                             <Form.Label>Nombre</Form.Label>
                             <Form.Control
                                 type="text"
                                 placeholder="Nombre..."
-                                value={selectedProduct ? selectedProduct.name : ""}
+                                value={selectedproducts.name}
                                 onChange={(e) => {
-                                    setSelectedProduct({
-                                        ...selectedProduct,
+                                    setSelectedproducts({
+                                        ...selectedproducts,
                                         name: e.target.value
                                     })
                                 }}
@@ -72,9 +78,9 @@ const ModalEditProduct = ({ product }) => {
                         >
                             <Form.Label>Precio</Form.Label>
                             <Form.Control type='text' placeholder='Precio...'
-                                value={selectedProduct ? selectedProduct.precio : ""}
-                                onChange={(e) => setSelectedProduct({
-                                    ...selectedProduct,
+                                value={selectedproducts ? selectedproducts.precio : ""}
+                                onChange={(e) => setSelectedproducts({
+                                    ...selectedproducts,
                                     precio: e.target.value
                                 })} />
                         </Form.Group>
@@ -85,31 +91,35 @@ const ModalEditProduct = ({ product }) => {
                     >
                         <Form.Label>Categoría</Form.Label>
                         <Form.Control type='text' placeholder='Categoria...'
-                            value={selectedProduct ? selectedProduct.category : ""}
-                            onChange={(e) => setSelectedProduct({
-                                ...selectedProduct,
+                            value={selectedproducts ? selectedproducts.category : ""}
+                            onChange={(e) => setSelectedproducts({
+                                ...selectedproducts,
                                 category: e.target.value
                             })} />
                     </Form.Group>
                     <Form.Group
-                        className="mb-3"
-                        controlId="imagen"
-                    >
-                        <Form.Label>Imagen...</Form.Label>
-                        <Form.Control type='text' placeholder='Imagen...'
-                            value={selectedProduct ? selectedProduct.imagen : ""}
-                            onChange={(e) => setSelectedProduct({
-                                ...selectedProduct,
+                        className='mb-3'
+                        controlId='imagen'>
+                        <Form.Label>
+                            Imagen
+                        </Form.Label>
+                        <Form.Control type='text' placeholder='Imagen...' value={selectedproducts ? selectedproducts.imagen : ""}
+                            onChange={(e) => setSelectedproducts({
+                                ...selectedproducts,
                                 imagen: e.target.value
-                            })} />
+                            })}>
+
+                        </Form.Control>
+
                     </Form.Group>
+
 
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="danger" onClick={handleClose}>
                         Cancelar
                     </Button>
-                    <Button variant="primary" onClick={(e) => editProduct(e, selectedProduct._id)}>
+                    <Button variant="primary" onClick={(e) => editproducts(e, selectedproducts._id)}>
                         Guardar Cambios
                     </Button>
                 </Modal.Footer>
@@ -118,4 +128,4 @@ const ModalEditProduct = ({ product }) => {
     )
 }
 
-export default ModalEditProduct
+export default ModalEditproducts
