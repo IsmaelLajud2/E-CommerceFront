@@ -48,7 +48,7 @@ const ModalEditproducts = ({ products, setFlag }) => {
     return (
         <>
             <Button variant="warning" size='sm' onClick={handleShow}>
-                Editar
+                EDITAR
             </Button>
 
             <Modal show={showModal} onHide={handleClose}>

@@ -3,6 +3,7 @@ import axios from 'axios'
 import { Col, Container, Row, Table, Button, Form, Modal, ModalHeader, ModalTitle, ModalBody, ModalFooter } from 'react-bootstrap'
 import Loading from '../Components/Loading'
 import ModalEditProduct from './ModalEditProduct'
+import ModalAddProduct from './ModalAddProduct'
 
 
 
@@ -88,6 +89,7 @@ const AdminPage = () => {
                     <Container>
                         <Row>
                             <h1>Administrador de productos</h1>
+                            <ModalAddProduct>Añadir</ModalAddProduct>
                             {
                                 <Table striped bordered variant='grey'>
                                     <thead>

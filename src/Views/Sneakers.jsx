@@ -7,7 +7,7 @@ import useFilteredProducts from '../Hooks/SortedProducts'
 
 const Sneakers = () => {
 
-    const { products, loading, setOrder, order } = useFilteredProducts("food")
+    const { products, loading, setOrder, order } = useFilteredProducts("zapatillas")
 
     const handleChange = (e) => {
         setOrder(e.target.value)
