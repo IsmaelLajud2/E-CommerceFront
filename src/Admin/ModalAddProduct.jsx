@@ -1,10 +1,11 @@
 import axios from 'axios'
 import React, { useRef, useState } from 'react'
-import { Button, Container, Form, FormGroup, Modal, Row } from 'react-bootstrap'
-
+import { Button, Form, Modal } from 'react-bootstrap'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 
 const ModalAddProduct = () => {
-    const [showModal, setShowModal] = useState(true)
+    const [showModal, setShowModal] = useState(false)
     const [error, setError] = useState({})
 
 
@@ -17,10 +18,7 @@ const ModalAddProduct = () => {
     })
 
 
-    const handleShowModal = () => {
-        setShowModal(showModal)
 
-    }
     const closeModal = () => {
         setShowModal(false)
     }
@@ -32,110 +30,170 @@ const ModalAddProduct = () => {
             [name]: value
         }
     }
+
+    const handleShowModal = () => {
+        productRef.current = {
+            name: "",
+            precio: "",
+            category: "",
+            imagen: ""
+        };
+        setError({});
+        setShowModal(true);
+    };
+
     const addProductApi = async (e) => {
 
         e.preventDefault()
 
-        let newerror = {}
+        let newError = {}
         if (productRef.current.name === "" || !productRef.current.name) {
-            newerror.name = "Ingresa un nombre valido"
+            newError.name = "Ingresa un nombre valido"
         }
         if (productRef.current.category === "" || !productRef.current.category) {
-            newerror.category = "Ingresa una categoria valida"
+            newError.category = "Ingresa una categoria valida"
 
         }
-        if (productRef.current.precio === "" || !productRef.current.precio) {
-            newerror.precio = "Ingresa un numero valido"
+        const precioValue = productRef.current.precio.trim();
+        const precioRegex = /^\d+([.,]\d+)?$/;
+        if (!precioValue || !precioRegex.test(precioValue)) {
+            newError.precio = "Ingresa un precio válido (números solamente)";
         }
-        setError(newerror)
+        if (Object.keys(newError).length > 0) {
+            setError(newError);
+            return;
+        }
 
-        try {
-            const response = await axios.post(`http://localhost:8091/api/productos/createProductos`, productRef.current, {
-                headers: {
-                    "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NzcxODcxYjFiYTQwMzkxYTZmMWJlMiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyMDUzNjA0MX0.6nu6Ake0YRs--GAEbnwKHzSqLfykkPwgh6x-DOsGQlI",
-                }
-            })
-            console.log("Producto creado", response)
-            return alert("Creado con exito")
-        } catch (error) {
-            console.log(error)
+        if (Object.keys(newError).length === 0) {
+            console.log("Producto Creado :", productRef.current)
+            try {
+                const { data } = await axios.post(
+                    'http://localhost:8091/api/productos/createProductos',
+                    productRef.current,
+                    {
+                        headers: {
+                            "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NzcxODcxYjFiYTQwMzkxYTZmMWJlMiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyMDUzNjA0MX0.6nu6Ake0YRs--GAEbnwKHzSqLfykkPwgh6x-DOsGQlI",
+                        },
+                    }
+
+                );
+
+                console.log("Creado con exito ", data)
+                toast.success("Producto creado correctamente",)
+
+            } catch (error) {
+                console.error("Error al crear el producto:", error.response?.data?.message || error.message);
+                toast.error("Error al crear el producto")
+
+            }
+
+            finally {
+                closeModal();
+            }
+
         }
-    }
+    };
 
     return (
         <>
-            <Button variant='succcess' size="sm" onClick={handleShowModal} >
+            <Button variant='success' size="sm" onClick={handleShowModal} >
                 Añadir un producto
             </Button>
             <Modal show={showModal} onHide={closeModal}>
                 <Modal.Header closeButton>
                     <Modal.Title>
                         Agregar un producto a tu web
-                    </Modal.Title>
-                    <Modal.Body>
-                        <Form onSubmit={addProductApi}>
-                            <Form.Group className='mb-3' controlId='name'>
-                                <Form.Label>Nombre</Form.Label>
-                                <Form.Control
-                                    type='text'
-                                    defaultValue={productRef.current.name}
-                                    placeholder='Nombre...'
-                                    isValid={productRef.current.name && !error.name}
-                                    onChange={handleChange}>
+                    </Modal.Title> </Modal.Header>
+                <Modal.Body>
+                    <Form onSubmit={addProductApi}>
+                        <Form.Group className='mb-3' controlId='name'>
+                            <Form.Label>Nombre</Form.Label>
+                            <Form.Control
+                                type='text'
+                                name='name'
+                                defaultValue={productRef.current.name}
+                                placeholder='Nombre...'
+                                isValid={productRef.current.name && !error.name}
+                                onChange={handleChange}
+                                isInvalid={!!error.name}>
 
 
-                                </Form.Control>
 
-                            </Form.Group>
-                            <Form.Group onSubmit={addProductApi} controlId='precio'>
-                                <Form.Label>
-                                    Precio
-                                </Form.Label>
-                                <Form.Control
-                                    type='text'
-                                    placeholder='Precio...'
-                                    defaultValue={productRef.current.precio}
-                                    onChange={handleChange}
-                                    isInvalid={productRef.current.precio && !error.precio}
-                                >
+                            </Form.Control>
+                            <Form.Control.Feedback type='invalid'>
+                                {error.name}
+                            </Form.Control.Feedback>
 
-                                </Form.Control>
-                            </Form.Group>
-                            <Form.Group onSubmit={addProductApi} controlId='category'>
-                                <Form.Label>
-                                    Categoría
-                                </Form.Label>
-                                <Form.Control
-                                    type='text'
-                                    placeholder='Precio...'
-                                    onChange={handleChange}
-                                    isValid={productRef.current.category && !error.category}
-                                >
+                        </Form.Group>
+                        <Form.Group onSubmit={addProductApi} controlId='precio'>
+                            <Form.Label>
+                                Precio
+                            </Form.Label>
+                            <Form.Control
+                                type='text'
+                                name='precio'
+                                placeholder='Precio...'
+                                defaultValue={productRef.current.precio}
+                                onChange={handleChange}
+                                isValid={productRef.current.precio && !error.precio}
+                                isInvalid={!!error.precio}
+                            >
 
-                                </Form.Control>
-                            </Form.Group>
-                            <Form.Group onSubmit={addProductApi} controlId='imagen'>
-                                <Form.Label>
-                                    Imagen
-                                </Form.Label>
-                                <Form.Control
-                                    type='text'
-                                    placeholder='Imagen...'
-                                    onChange={handleChange}
-                                    isValid={productRef.current.imagen && !error.imagen}>
+                            </Form.Control>
+                            <Form.Control.Feedback type='invalid'>
+                                {error.precio}
+                            </Form.Control.Feedback>
+                        </Form.Group>
+                        <Form.Group onSubmit={addProductApi} controlId='category'>
+                            <Form.Label>
+                                Categoría
+                            </Form.Label>
+                            <Form.Control
+                                type='text'
+                                name='category'
+                                placeholder='Categoría...'
+                                onChange={handleChange}
+                                isValid={productRef.current.category && !error.category}
+                                defaultValue={productRef.current.category}
+                                isInvalid={!!error.category}
+                            >
 
-                                </Form.Control>
-                            </Form.Group>
+                            </Form.Control>
+                            <Form.Control.Feedback type='invalid'>
+                                {error.category}
+                            </Form.Control.Feedback>
+                        </Form.Group>
+                        <Form.Group onSubmit={addProductApi} controlId='imagen'>
+                            <Form.Label>
+                                Imagen
+                            </Form.Label>
+                            <Form.Control
+                                type='text'
+                                name='imagen'
+                                placeholder='Imagen...'
+                                onChange={handleChange}
+                                isValid={productRef.current.imagen && !error.imagen}
+                                defaultValue={productRef.current.imagen}
+                                isInvalid={!!error.imagen}>
 
-                        </Form>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant='danger' onClick={closeModal}>Cancelar</Button>
-                        <Button variant='primary' onClick={(e) => addProductApi(e, productRef.current)}>Crear</Button>
-                    </Modal.Footer>
-                </Modal.Header>
+                            </Form.Control>
+                            <Form.Control.Feedback type='invalid'>
+                                {error.imagen}
+                            </Form.Control.Feedback>
+                        </Form.Group>
+
+                    </Form>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant='danger' onClick={closeModal}>Cancelar</Button>
+
+                    <Button variant='primary' onClick={addProductApi}>Crear</Button>
+
+                </Modal.Footer>
+
 
             </Modal>
+            <ToastContainer></ToastContainer>
         </>
     )
 }
