@@ -1,0 +1,32 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.main-container {
+
+
+    margin-top: 2%;
+}
+
+h1 {
+
+    margin-left: 20px
+}
+
+.search-col {
+    flex: 1;
+
+    margin-left: 20px;
+
+}
+
+.search-input-group {
+    margin-top: 5%;
+    margin-left: 15%;
+    width: 283px;
+}
+
+.modal-button {
+    margin-top: 1%;
+}

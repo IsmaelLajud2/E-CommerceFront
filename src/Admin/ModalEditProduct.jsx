@@ -1,51 +1,46 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import axios from 'axios'
 import { Modal, Button, Form } from 'react-bootstrap'
 
-
 const ModalEditproducts = ({ products, setFlag }) => {
-    const [showModal, setShowModal] = useState(false)
+  const [showModal, setShowModal] = useState(false)
 
-    const [selectedproducts, setSelectedproducts] = useState({
-        _id: products._id || '',
-        name: products.name || '',
-        precio: products.precio || '',
-        category: products.category || '',
-        imagen: products.imagen || ''
-    })
+  const [selectedproducts, setSelectedproducts] = useState({
+    _id: products._id || '',
+    name: products.name || '',
+    precio: products.precio || '',
+    category: products.category || '',
+    imagen: products.imagen || ''
+  })
 
-    const handleClose = () => {
-        setShowModal(false)
-    }
+  const handleClose = () => {
+    setShowModal(false)
+  }
 
+  const handleShow = () => {
+    setSelectedproducts(products)
+    setShowModal(true)
+  }
 
-
-
-    const handleShow = () => {
-        setSelectedproducts(products)
-        setShowModal(true)
-    }
-
-    const editproducts = async (e, _id) => {
-        e.preventDefault()
-        try {
-            const response = await axios.patch(`http://localhost:8091/api/productos/edit/${_id}`, selectedproducts, {
-                headers: {
-                    "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NzcxODcxYjFiYTQwMzkxYTZmMWJlMiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyMDUzNjA0MX0.6nu6Ake0YRs--GAEbnwKHzSqLfykkPwgh6x-DOsGQlI",
-                }
-
-            })
-            setFlag((prevFlag) => !prevFlag)
-            console.log(response)
-        } catch (error) {
-            console.log(error)
+  const editproducts = async (e, _id) => {
+    e.preventDefault()
+    try {
+      const response = await axios.patch(`http://localhost:8091/api/productos/edit/${_id}`, selectedproducts, {
+        headers: {
+          'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NzcxODcxYjFiYTQwMzkxYTZmMWJlMiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyMDUzNjA0MX0.6nu6Ake0YRs--GAEbnwKHzSqLfykkPwgh6x-DOsGQlI'
         }
-        finally {
-            handleClose()
-        }
-    }
 
-    return (
+      })
+      setFlag((prevFlag) => !prevFlag)
+      console.log(response)
+    } catch (error) {
+      console.log(error)
+    } finally {
+      handleClose()
+    }
+  }
+
+  return (
         <>
             <Button variant="warning" size='sm' onClick={handleShow}>
                 EDITAR
@@ -64,10 +59,10 @@ const ModalEditproducts = ({ products, setFlag }) => {
                                 placeholder="Nombre..."
                                 value={selectedproducts.name}
                                 onChange={(e) => {
-                                    setSelectedproducts({
-                                        ...selectedproducts,
-                                        name: e.target.value
-                                    })
+                                  setSelectedproducts({
+                                    ...selectedproducts,
+                                    name: e.target.value
+                                  })
                                 }}
                                 autoFocus
                             />
@@ -78,10 +73,10 @@ const ModalEditproducts = ({ products, setFlag }) => {
                         >
                             <Form.Label>Precio</Form.Label>
                             <Form.Control type='text' placeholder='Precio...'
-                                value={selectedproducts ? selectedproducts.precio : ""}
+                                value={selectedproducts ? selectedproducts.precio : ''}
                                 onChange={(e) => setSelectedproducts({
-                                    ...selectedproducts,
-                                    precio: e.target.value
+                                  ...selectedproducts,
+                                  precio: e.target.value
                                 })} />
                         </Form.Group>
                     </Form>
@@ -91,10 +86,10 @@ const ModalEditproducts = ({ products, setFlag }) => {
                     >
                         <Form.Label>Categoría</Form.Label>
                         <Form.Control type='text' placeholder='Categoria...'
-                            value={selectedproducts ? selectedproducts.category : ""}
+                            value={selectedproducts ? selectedproducts.category : ''}
                             onChange={(e) => setSelectedproducts({
-                                ...selectedproducts,
-                                category: e.target.value
+                              ...selectedproducts,
+                              category: e.target.value
                             })} />
                     </Form.Group>
                     <Form.Group
@@ -103,16 +98,15 @@ const ModalEditproducts = ({ products, setFlag }) => {
                         <Form.Label>
                             Imagen
                         </Form.Label>
-                        <Form.Control type='text' placeholder='Imagen...' value={selectedproducts ? selectedproducts.imagen : ""}
+                        <Form.Control type='text' placeholder='Imagen...' value={selectedproducts ? selectedproducts.imagen : ''}
                             onChange={(e) => setSelectedproducts({
-                                ...selectedproducts,
-                                imagen: e.target.value
+                              ...selectedproducts,
+                              imagen: e.target.value
                             })}>
 
                         </Form.Control>
 
                     </Form.Group>
-
 
                 </Modal.Body>
                 <Modal.Footer>
@@ -125,7 +119,7 @@ const ModalEditproducts = ({ products, setFlag }) => {
                 </Modal.Footer>
             </Modal>
         </>
-    )
+  )
 }
 
 export default ModalEditproducts

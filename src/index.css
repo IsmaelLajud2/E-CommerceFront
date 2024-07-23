@@ -18,3 +18,10 @@ h1 {
   display: flex;
   align-items: center;
 }
+
+.input-admin {
+  display: flex;
+  justify-content: center;
+
+
+}

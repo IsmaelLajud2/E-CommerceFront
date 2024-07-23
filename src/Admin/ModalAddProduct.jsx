@@ -1,103 +1,93 @@
 import axios from 'axios'
-import React, { useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { Button, Form, Modal } from 'react-bootstrap'
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 const ModalAddProduct = () => {
-    const [showModal, setShowModal] = useState(false)
-    const [error, setError] = useState({})
+  const [showModal, setShowModal] = useState(false)
+  const [error, setError] = useState({})
 
+  const productRef = useRef({
+    name: '',
+    precio: '',
+    category: '',
+    imagen: ''
 
-    const productRef = useRef({
-        name: "",
-        precio: "",
-        category: "",
-        imagen: "",
+  })
 
-    })
+  const closeModal = () => {
+    setShowModal(false)
+  }
 
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    productRef.current = {
+      ...productRef.current,
+      [name]: value
+    }
+  }
 
+  const handleShowModal = () => {
+    productRef.current = {
+      name: '',
+      precio: '',
+      category: '',
+      imagen: ''
+    }
+    setError({})
+    setShowModal(true)
+  }
 
-    const closeModal = () => {
-        setShowModal(false)
+  const addProductApi = async (e) => {
+    e.preventDefault()
+
+    const newError = {}
+    if (productRef.current.name === '' || !productRef.current.name) {
+      newError.name = 'Ingresa un nombre valido'
+    }
+    if (productRef.current.category === '' || !productRef.current.category) {
+      newError.category = 'Ingresa una categoria valida'
+    }
+    const precioValue = productRef.current.precio.trim()
+    const precioRegex = /^\d+([.,]\d+)?$/
+    if (!precioValue || !precioRegex.test(precioValue)) {
+      newError.precio = 'Ingresa un precio válido (números solamente)'
+    }
+    if (Object.keys(newError).length > 0) {
+      setError(newError)
+      return
     }
 
-    const handleChange = (e) => {
-        const { name, value } = e.target
-        productRef.current = {
-            ...productRef.current,
-            [name]: value
-        }
+    if (Object.keys(newError).length === 0) {
+      console.log('Producto Creado :', productRef.current)
+      try {
+        const { data } = await axios.post(
+          'http://localhost:8091/api/productos/createProductos',
+          productRef.current,
+          {
+            headers: {
+              'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NzcxODcxYjFiYTQwMzkxYTZmMWJlMiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyMDUzNjA0MX0.6nu6Ake0YRs--GAEbnwKHzSqLfykkPwgh6x-DOsGQlI'
+            }
+          }
+
+        )
+
+        console.log('Creado con exito ', data)
+        toast.success('Producto creado correctamente')
+      } catch (error) {
+        console.error('Error al crear el producto:', error.response?.data?.message || error.message)
+        toast.error('Error al crear el producto')
+      } finally {
+        closeModal()
+      }
     }
+  }
 
-    const handleShowModal = () => {
-        productRef.current = {
-            name: "",
-            precio: "",
-            category: "",
-            imagen: ""
-        };
-        setError({});
-        setShowModal(true);
-    };
-
-    const addProductApi = async (e) => {
-
-        e.preventDefault()
-
-        let newError = {}
-        if (productRef.current.name === "" || !productRef.current.name) {
-            newError.name = "Ingresa un nombre valido"
-        }
-        if (productRef.current.category === "" || !productRef.current.category) {
-            newError.category = "Ingresa una categoria valida"
-
-        }
-        const precioValue = productRef.current.precio.trim();
-        const precioRegex = /^\d+([.,]\d+)?$/;
-        if (!precioValue || !precioRegex.test(precioValue)) {
-            newError.precio = "Ingresa un precio válido (números solamente)";
-        }
-        if (Object.keys(newError).length > 0) {
-            setError(newError);
-            return;
-        }
-
-        if (Object.keys(newError).length === 0) {
-            console.log("Producto Creado :", productRef.current)
-            try {
-                const { data } = await axios.post(
-                    'http://localhost:8091/api/productos/createProductos',
-                    productRef.current,
-                    {
-                        headers: {
-                            "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NzcxODcxYjFiYTQwMzkxYTZmMWJlMiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcyMDUzNjA0MX0.6nu6Ake0YRs--GAEbnwKHzSqLfykkPwgh6x-DOsGQlI",
-                        },
-                    }
-
-                );
-
-                console.log("Creado con exito ", data)
-                toast.success("Producto creado correctamente",)
-
-            } catch (error) {
-                console.error("Error al crear el producto:", error.response?.data?.message || error.message);
-                toast.error("Error al crear el producto")
-
-            }
-
-            finally {
-                closeModal();
-            }
-
-        }
-    };
-
-    return (
+  return (
         <>
-            <Button variant='success' size="sm" onClick={handleShowModal} >
-                Añadir un producto
+            <Button variant='success' onClick={handleShowModal} style={{ marginLeft: '200px' }} >
+                Añadir un nuevo producto
             </Button>
             <Modal show={showModal} onHide={closeModal}>
                 <Modal.Header closeButton>
@@ -116,8 +106,6 @@ const ModalAddProduct = () => {
                                 isValid={productRef.current.name && !error.name}
                                 onChange={handleChange}
                                 isInvalid={!!error.name}>
-
-
 
                             </Form.Control>
                             <Form.Control.Feedback type='invalid'>
@@ -168,7 +156,7 @@ const ModalAddProduct = () => {
                                 Imagen
                             </Form.Label>
                             <Form.Control
-                                type='text'
+                                type=''
                                 name='imagen'
                                 placeholder='Imagen...'
                                 onChange={handleChange}
@@ -191,11 +179,10 @@ const ModalAddProduct = () => {
 
                 </Modal.Footer>
 
-
             </Modal>
             <ToastContainer></ToastContainer>
         </>
-    )
+  )
 }
 
 export default ModalAddProduct

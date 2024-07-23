@@ -3,13 +3,12 @@ import { Container, Form, Nav, Navbar, NavbarText, NavDropdown } from 'react-boo
 import '../Styles/NavBarStyles.css'
 import { Link } from 'react-router-dom'
 const Navbar1 = () => {
-
   const navbarStyle1 = {
-    backgroundColor: 'black',
+    backgroundColor: 'black'
 
-  };
+  }
   const navWhiteStyle = {
-    color: '#fff',
+    color: '#fff'
 
   }
 
@@ -19,10 +18,9 @@ const Navbar1 = () => {
     paddingRight: '40px',
     fontSize: '16px',
     width: 'calc(100% - 40px)',
-    height: '38px',
+    height: '38px'
 
   }
-
 
   return (
     <Navbar expand="lg" className="" style={navbarStyle1} sticky="top" >
@@ -38,14 +36,14 @@ const Navbar1 = () => {
             navbarScroll
           >
             <NavbarText className='navheadear'>
-              <Link to={"/zapatillas"} className='navbar-link mx-4' style={navWhiteStyle} >Zapatillas</Link>
+              <Link to={'/zapatillas'} className='navbar-link mx-4' style={navWhiteStyle} >Zapatillas</Link>
             </NavbarText>
 
             <NavbarText>
-              <Link to={"/sudaderas"} className=' navbar-link mx-4' style={navWhiteStyle} >Sudaderas</Link>
+              <Link to={'/sudaderas'} className=' navbar-link mx-4' style={navWhiteStyle} >Sudaderas</Link>
             </NavbarText>
             <NavbarText>
-              <Link to={"/camisetas"} className='navbar-link mx-4' style={navWhiteStyle} >Camisetas</Link>
+              <Link to={'/camisetas'} className='navbar-link mx-4' style={navWhiteStyle} >Camisetas</Link>
             </NavbarText>
           </Nav>
 
@@ -60,8 +58,6 @@ const Navbar1 = () => {
 
             />
             <img src="searchIcon.svg" alt="Search Icon" className="search-icon" />
-
-
 
           </Form>
         </Navbar.Collapse>
