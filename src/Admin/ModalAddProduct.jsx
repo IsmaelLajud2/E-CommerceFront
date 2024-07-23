@@ -156,7 +156,7 @@ const ModalAddProduct = () => {
                                 Imagen
                             </Form.Label>
                             <Form.Control
-                                type=''
+                                type='text'
                                 name='imagen'
                                 placeholder='Imagen...'
                                 onChange={handleChange}
