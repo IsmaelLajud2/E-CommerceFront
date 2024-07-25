@@ -46,6 +46,7 @@ const Navbar1 = () => {
               <Link to={'/camisetas'} className='navbar-link mx-4' style={navWhiteStyle} >Camisetas</Link>
             </NavbarText>
           </Nav>
+            <div>
 
           <Form className="d-flex align-items-center" style={navWhiteStyle}>
 
@@ -60,6 +61,7 @@ const Navbar1 = () => {
             <img src="searchIcon.svg" alt="Search Icon" className="search-icon" />
 
           </Form>
+          </div>
         </Navbar.Collapse>
       </Container>
     </Navbar>
